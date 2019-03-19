@@ -311,11 +311,17 @@ bool MicroNMEA::processGGA(const char *s)
 		s += 2; // Skip E/W and comma
 	}
 	_isValid = (*s == '1' || *s == '2');
+    _quality = parseUnsignedInt(s,1);
 	s += 2; // Skip position fix flag and comma
 	_numSat = parseFloat(s, 0, &s);
 	_hdop = parseFloat(s, 1, &s);
 	_altitude = parseFloat(s, 3, &s);
+	s += 2; // Skip unit of altitude
+	parseFloat(s, 3, &s); // height above geoid
+    s += 2; // Skip unit of height above geoid
+    _ageOfDgps= parseFloat(s, 1, &s); // 
 	_altitudeValid = true;
+    
 	// That's all we care about
 	return true;
 }

@@ -82,6 +82,11 @@ public:
 			alt = _altitude;
 		return _altitudeValid;
 	}
+	
+	// Altitude in millimetres.
+	long getAltitude() const {
+		return _altitude;
+	}
 
 	uint16_t getYear(void) const {
 		return _year;
@@ -109,6 +114,14 @@ public:
 
 	uint8_t getHundredths(void) const {
 		return _hundredths;
+	}
+
+	uint8_t getQuality(void) const {
+		return _quality;
+	}
+
+	uint16_t getAgeOfDGPS(void) const {
+		return _ageOfDgps;
 	}
 
 	long getSpeed(void) const {
@@ -177,8 +190,11 @@ private:
 	long _speed, _course;
 	uint16_t _year;
 	uint8_t _month, _day, _hour, _minute, _second, _hundredths;
+    uint8_t _quality;
 	uint8_t _numSat;
 	uint8_t _hdop;
+	uint16_t _ageOfDgps;
+    
 
 	void (*_badChecksumHandler)(const MicroNMEA &nmea);
 	void (*_unknownSentenceHandler)(const MicroNMEA &nmea);
